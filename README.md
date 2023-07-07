@@ -1,10 +1,19 @@
 # Restaurant Tracking & Monitoring System
 
-<b>Problem Statement: </b><i> There are several restaurants in the United States that need to monitor if the store is online or not. All restaurants are supposed to be online during their business hours. Due to some unknown reasons, a store might go inactive for a few hours. Restaurant owners want to get a report of how often this happened in the past.</i>   
+<i>NOTE: To run this backend solution on your system, follow the steps:
+1. Open your terminal and change the directory to the desired folder.
+2. Create a Python virtual environment using your terminal.
+3. Clone the repository into the desired directory.
+4. Download the required modules  (pip install -r requirements.txt)
+5. Execute the run.py file.
+6. Use Postman/Thunderclient, etc. for executing API requests and responses. </i>
 
-<b>Aim: </b>To develop optimized and efficient solutions by building backend APIs that will help restaurant owners achieve this goal. 
 
-<b>About the Data: </b> We have 3 sources of data --
+<b><u>Problem Statement</u>: </b><i> There are several restaurants in the United States that need to monitor if the store is online or not. All restaurants are supposed to be online during their business hours. Due to some unknown reasons, a store might go inactive for a few hours. Restaurant owners want to get a report of how often this happened in the past.</i>   
+
+<b><u>Aim</u>: </b>To develop optimized and efficient solutions by building backend APIs that will help restaurant owners achieve this goal. 
+
+<b><u>About the Data</u>: </b> We have 3 sources of data --
 1. We poll every store roughly every hour and have data about whether the store was active or not in a CSV.  The CSV has 3 columns (`store_id, timestamp_utc, status`) where status is active or inactive.  All timestamps are in **UTC**<br>
 2. We have the business hours of all the stores - the schema of this data is `store_id, dayOfWeek(0=Monday, 6=Sunday), start_time_local, end_time_local`<br>
     1. These times are in the **local time zone**<br>
@@ -14,13 +23,13 @@
     2. This is used so that data sources 1 and 2 can be compared against each other. <br>
 
 
-<b>System Requirements: </b>
+<b><u>System Requirements</u>: </b>
 - Do not assume that this data is static and precompute the answers as this data will keep getting updated every hour.
 - You need to store these CSVs in a relevant database and make API calls to get the data.
   (Currently, SQLite has been used as a lightweight database, however, extended implementation would involve PostgreSQL to leverage the power of multi-threading and caching)
 
 
-<b>Data Output Requirements: </b>
+<b><u>Data Output Requirements</u>: </b>
 Generate a report to the user with the schema:
 `store_id, uptime_last_hour(in minutes), uptime_last_day(in hours), update_last_week(in hours), downtime_last_hour(in minutes), downtime_last_day(in hours), downtime_last_week(in hours)` 
 
@@ -31,7 +40,7 @@ Generate a report to the user with the schema:
         b. we need to fill the entire business hours interval with uptime and downtime from these 2 observations based on some sane interpolation logic.
 
 
-<b>API requirement: </b> We build two APIs for triggering & generating reports and one API for data import and caching. 
+<b><u>API requirement</u>: </b> We build two APIs for triggering & generating reports and one API for data import and caching. 
  
 1. <i>/trigger_report</i> endpoint that will trigger report generation from the data provided (stored in DB)
         1. No input 
