@@ -1,11 +1,10 @@
 # Restaurant Tracking & Monitoring System
 
-<b>Problem Statement: </b><i> There are several restaurants in the United States that need to monitor if the store is online or not. All restaurants are supposed to be online during their business hours. Due to some unknown reasons, a store might go inactive for a few hours. Restaurant owners want to get a report of the how often this happened in the past.</i>   
+<b>Problem Statement: </b><i> There are several restaurants in the United States that need to monitor if the store is online or not. All restaurants are supposed to be online during their business hours. Due to some unknown reasons, a store might go inactive for a few hours. Restaurant owners want to get a report of how often this happened in the past.</i>   
 
 <b>Aim: </b>To develop optimized and efficient solutions by building backend APIs that will help restaurant owners achieve this goal. 
 
 <b>About the Data: </b> We have 3 sources of data --
-
 1. We poll every store roughly every hour and have data about whether the store was active or not in a CSV.  The CSV has 3 columns (`store_id, timestamp_utc, status`) where status is active or inactive.  All timestamps are in **UTC**<br>
 2. We have the business hours of all the stores - the schema of this data is `store_id, dayOfWeek(0=Monday, 6=Sunday), start_time_local, end_time_local`<br>
     1. These times are in the **local time zone**<br>
@@ -14,13 +13,14 @@
     1. If data is missing for a store, assume it is America/Chicago<br>
     2. This is used so that data sources 1 and 2 can be compared against each other. <br>
 
+
 <b>System Requirements: </b>
 - Do not assume that this data is static and precompute the answers as this data will keep getting updated every hour.
 - You need to store these CSVs in a relevant database and make API calls to get the data.
   (Currently, SQLite has been used as a lightweight database, however, extended implementation would involve PostgreSQL to leverage the power of multi-threading and caching)
 
-<b>Data Output Requirements: </b>
 
+<b>Data Output Requirements: </b>
 Generate a report to the user with the schema:
 `store_id, uptime_last_hour(in minutes), uptime_last_day(in hours), update_last_week(in hours), downtime_last_hour(in minutes), downtime_last_day(in hours), downtime_last_week(in hours)` 
 
@@ -31,7 +31,7 @@ Generate a report to the user with the schema:
         b. we need to fill the entire business hours interval with uptime and downtime from these 2 observations based on some sane interpolation logic.
 
 
-<b>API requirement: </b> We build two APIs for triggering & generating report and one API for data import and caching. 
+<b>API requirement: </b> We build two APIs for triggering & generating reports and one API for data import and caching. 
  
 1. <i>/trigger_report</i> endpoint that will trigger report generation from the data provided (stored in DB)
         1. No input 
@@ -43,3 +43,11 @@ Generate a report to the user with the schema:
             - if report generation is not complete, return “Running” as the output
             - if report generation is complete, return “Complete” along with the CSV file with the schema described above.
 3. <i>/import_data</i> endpoint that is responsible for importing data from CSV to the database and caching the following data for faster in-memory access
+
+
+<b>Screenshots of the following results: </b>
+<img width="1424" alt="Screenshot 2023-07-07 at 10 38 51 PM" src="https://github.com/PrabalS12/Problem-Statement-Restaurant-Tracking-Monitoring-System/assets/90951846/d6361d7a-76f5-4a21-9bc4-f092e4584962">
+
+<img width="1373" alt="Screenshot 2023-07-07 at 10 52 57 PM" src="https://github.com/PrabalS12/Problem-Statement-Restaurant-Tracking-Monitoring-System/assets/90951846/1def4a76-4c12-4518-8254-399d743a6f71">
+
+<img width="1436" alt="Screenshot 2023-07-07 at 10 53 10 PM" src="https://github.com/PrabalS12/Problem-Statement-Restaurant-Tracking-Monitoring-System/assets/90951846/365e22eb-cc95-4a3f-b4ea-1a24760137a8">
