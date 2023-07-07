@@ -9,7 +9,7 @@
 6. Use Postman/Thunderclient, etc. for executing API requests and responses. </i>
 
 
-<b><u>Problem Statement</u>: </b><i> There are several restaurants in the United States that need to monitor if the store is online or not. All restaurants are supposed to be online during their business hours. Due to some unknown reasons, a store might go inactive for a few hours. Restaurant owners want to get a report of how often this happened in the past.</i>   
+<b><u>Problem Statement</u>: </b><i> several restaurants in the United States need to monitor if the store is online or not. All restaurants are supposed to be online during their business hours. Due to some unknown reasons, a store might go inactive for a few hours. Restaurant owners want to get a report of how often this happened in the past.</i>   
 
 <b><u>Aim</u>: </b>To develop optimized and efficient solutions by building backend APIs that will help restaurant owners achieve this goal. 
 
@@ -42,16 +42,16 @@ Generate a report to the user with the schema:
 
 <b><u>API requirement</u>: </b> We build two APIs for triggering & generating reports and one API for data import and caching. 
  
-1. <i>/trigger_report</i> endpoint that will trigger report generation from the data provided (stored in DB)
-        1. No input 
-        2. Output - report_id (random string) 
-        3. report_id will be used for polling the status of report completion
-2. <i>/get_report</i> endpoint that will return the status of the report or the csv
-        1. Input - report_id
-        2. Output
-            - if report generation is not complete, return “Running” as the output
-            - if report generation is complete, return “Complete” along with the CSV file with the schema described above.
-3. <i>/import_data</i> endpoint that is responsible for importing data from CSV to the database and caching the following data for faster in-memory access
+1. <i><b>/trigger_report</b></i> endpoint that will trigger report generation from the data provided (stored in DB)<br>
+        1. No input <br>
+        2. Output - report_id (random string) <br>
+        3. report_id will be used for polling the status of report completion<br>
+2. <i><b>/get_report</b></i> endpoint that will return the status of the report or the csv<br>
+        1. Input - report_id<br>
+        2. Output<br>
+            - if report generation is not complete, return “Running” as the output<br>
+            - if report generation is complete, return “Complete” along with the CSV file with the schema described above.<br>
+3. <i><b>/import_data</b></i> endpoint that is responsible for importing data from CSV to the database and caching the following data for faster in-memory access
 
 
 <b>Screenshots of the following results: </b>
